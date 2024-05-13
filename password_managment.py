@@ -1,10 +1,13 @@
 # password manager ke 3 mode dare 
 # user va pass ro migire to file save mikone 
 # ba sarche ham mitoni pass mored nazareto pida koni
+from userID import id
 
-def user_pass(username , password):
+
+
+def user_pass(username , password, U_id):
     with open("./password_F.txt", "a") as f:
-        f.write(f"{username}-{password}\n")
+        f.write(f"{username}|{password}|{U_id}\n")
     
     print("ADDED :)")
 
@@ -12,8 +15,8 @@ def user_view():
     with open("./password_F.txt", "r") as f:
         for item in f:
             item = item.rstrip()
-            username ,password = item.split("-")
-            print(f"UserName:{username} - Password:{password}")
+            username ,password = item.split("|")
+            print(f"UserName:{username} | Password:{password}")
 
 
 
@@ -30,7 +33,9 @@ while True:
         
         username = input("Enter new username:")
         password = input("Enter new password")
-        user_pass(username , password)
+        u_id = id().ganereate_id()
+        user_pass(username , password , u_id)
+        
         
 
     elif user_input == "q":
